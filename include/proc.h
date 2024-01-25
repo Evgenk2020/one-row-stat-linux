@@ -14,7 +14,6 @@ struct keys
     const std::string k_info = "-i";
     const std::string k_data = "-d";
     const std::string k_file = "-df";
-    std::string similar;
 };
 
 class processing
