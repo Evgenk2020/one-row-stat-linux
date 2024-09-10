@@ -1,0 +1,1 @@
+/usr/lib64/ccache/c++ CMakeFiles/onerow.dir/src/main.cpp.o -o app/bin/onerow  app/lib/static/libproc.a app/lib/static/liboutput.a app/lib/static/libstat.a
