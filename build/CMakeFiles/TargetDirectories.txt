@@ -1,6 +1,0 @@
-/home/evheny/vsprojects/statistics/one-row-stat-linux-local/build/CMakeFiles/stat.dir
-/home/evheny/vsprojects/statistics/one-row-stat-linux-local/build/CMakeFiles/output.dir
-/home/evheny/vsprojects/statistics/one-row-stat-linux-local/build/CMakeFiles/proc.dir
-/home/evheny/vsprojects/statistics/one-row-stat-linux-local/build/CMakeFiles/onerow.dir
-/home/evheny/vsprojects/statistics/one-row-stat-linux-local/build/CMakeFiles/edit_cache.dir
-/home/evheny/vsprojects/statistics/one-row-stat-linux-local/build/CMakeFiles/rebuild_cache.dir
