@@ -1,6 +1,7 @@
 #include "../include/output.h"
 #include <iostream>
 #include <fstream>
+#include <locale>
 
 general_info::~general_info() {}
 
@@ -76,22 +77,22 @@ void file_info::see_info(statistics *stat)
     std::locale m_loc("uk_UA.utf8");
     writer.imbue(m_loc);
 
-    writer << "Послідовність: " << coma;
+    writer << quo << "Послідовність:" << quo << coma;
     for (auto data : stat->data)
     {
         writer << quo << data << quo << coma;
     }
     writer << std::endl;
 
-    writer << "Число елементів:" << coma << quo << stat->data.size() << quo << std::endl;
-    writer << "Сума чисел: " << coma << quo << stat->sum << quo << std::endl;
-    writer << "Середнє арифметичне:" << coma << quo << stat->average << quo << std::endl;
-    writer << "Середнє квадратичне: " << coma << quo << stat->root_mean_square << quo << std::endl;
-    writer << "Дисперсія:" << coma << quo << stat->dispersion << quo << std::endl;
-    writer << "Стандартне відхилення:" << coma << quo << stat->deviation << quo << std::endl;
-    writer << "Коефіцієнт варіації:" << coma << quo << stat->variation_co << quo << std::endl;
-    writer << "Похибка середньої величини:" << coma << quo << stat->mean_error << quo << std::endl;
-    writer << "Відносна похибка середньої величини:" << coma << quo << stat->relative_mean_error << quo << std::endl;
+    writer << quo << "Число елементів:" << quo << coma << quo << stat->data.size() << quo << std::endl;
+    writer << quo << "Сума чисел: " << quo << coma << quo << stat->sum << quo << std::endl;
+    writer << quo << "Середнє арифметичне:" << quo << coma << quo << stat->average << quo << std::endl;
+    writer << quo << "Середнє квадратичне: " << quo << coma << quo << stat->root_mean_square << quo << std::endl;
+    writer << quo << "Дисперсія:" << quo << coma << quo << stat->dispersion << quo << std::endl;
+    writer << quo << "Стандартне відхилення:" << quo << coma << quo << stat->deviation << quo << std::endl;
+    writer << quo << "Коефіцієнт варіації:" << quo << coma << quo << stat->variation_co << quo << std::endl;
+    writer << quo << "Похибка середньої величини:" << quo << coma << quo << stat->mean_error << quo << std::endl;
+    writer << quo << "Відносна похибка середньої величини:" << quo << coma << quo << stat->relative_mean_error << quo << std::endl;
     writer << "" << std::endl;
 
     std::cout << "Дані додані у файл one-rstat.csv" << std::endl;
