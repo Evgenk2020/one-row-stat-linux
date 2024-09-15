@@ -1,4 +1,4 @@
-# Short sequence statistics
+# Basic statistical treatment
 
 Lab utility for simple statistical estimation
 
