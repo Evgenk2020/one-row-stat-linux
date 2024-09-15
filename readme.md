@@ -6,7 +6,8 @@ Run it with specified keys
 
 ```
 
-onerow -d [first_number] [second_number] ... [sequent_number]
+onerow -d [first number] [second number] ... [sequent number]
+onerow -df [first number] [second number] ... [sequent number]
 
 ```
 Using `-df` key you may write data to `*.csv` file for the next importing to LibreOffice Calc, MS Excell or Google Tables
@@ -43,7 +44,7 @@ exec $SHELL
 
 ```
 
-or for writing `one-rstat.csv` use
+or for writing `.csv` use
 
 ```SH
 
