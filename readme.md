@@ -6,8 +6,7 @@ Run it with specified keys
 
 ```
 
-onerow -d [first number] [second number] ... [sequent number]
-onerow -df [first number] [second number] ... [sequent number]
+onerow -d | -df <first> <second> ... <sequent>
 
 ```
 Using `-df` key you may write data to `*.csv` file for the next importing to LibreOffice Calc, MS Excell or Google Tables
