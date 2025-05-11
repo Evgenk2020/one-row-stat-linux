@@ -1,0 +1,6 @@
+/home/evheny/vsprojects/cpp-projects/one-row-stat-linux/build/CMakeFiles/stat.dir
+/home/evheny/vsprojects/cpp-projects/one-row-stat-linux/build/CMakeFiles/output.dir
+/home/evheny/vsprojects/cpp-projects/one-row-stat-linux/build/CMakeFiles/proc.dir
+/home/evheny/vsprojects/cpp-projects/one-row-stat-linux/build/CMakeFiles/onerow.dir
+/home/evheny/vsprojects/cpp-projects/one-row-stat-linux/build/CMakeFiles/edit_cache.dir
+/home/evheny/vsprojects/cpp-projects/one-row-stat-linux/build/CMakeFiles/rebuild_cache.dir

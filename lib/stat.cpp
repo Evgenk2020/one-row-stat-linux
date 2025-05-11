@@ -3,8 +3,8 @@
 
 statistics::statistics(std::vector<float> inp_data) : data(inp_data)
 {
-    // сумма
-    auto sum_ = [this]()
+    // сума
+    auto sum_ = [this]() -> void
     {
         float sum_ = 0;
         for (auto temp : data)
@@ -12,16 +12,11 @@ statistics::statistics(std::vector<float> inp_data) : data(inp_data)
             sum_ += temp;
         }
 
-        return sum_;
+        sum = sum_;
     };
 
-    sum = sum_();
-
-    // среднее арифметическое
-    average = sum / data.size();
-
-    // среднее квадратическое
-    auto root_mean_square_ = [this]()
+    // середнє квадратичне
+    auto root_mean_square_ = [this]() -> void
     {
         float sum_sq = 0;
         for (auto temp : data)
@@ -29,13 +24,11 @@ statistics::statistics(std::vector<float> inp_data) : data(inp_data)
             sum_sq += pow(temp, 2);
         }
 
-        return (float)(sqrt(sum_sq / data.size()));
+        root_mean_square = (float)(sqrt(sum_sq / data.size()));
     };
 
-    root_mean_square = root_mean_square_();
-
-    // дисперсия
-    auto disp_ = [this]()
+    // дисперсія
+    auto disp_ = [this]() -> void
     {
         float ds_ = 0;
         for (auto temp : data)
@@ -43,20 +36,20 @@ statistics::statistics(std::vector<float> inp_data) : data(inp_data)
             ds_ += (pow(temp, 2) - pow(average, 2));
         }
 
-        return (float)(ds_ / (data.size() - 1));
+        dispersion = (float)(ds_ / (data.size() - 1));
     };
-    
-    dispersion = disp_();
 
-    // стандартное отклонение
+    sum_();
+    // середнє арифметичне
+    average = sum / data.size();
+    root_mean_square_();
+    disp_();
+    // стандартне відхилення
     deviation = sqrt(dispersion);
-
-    // коэффициент вариации
+    // коефіцієнт варіації
     variation_co = deviation / average;
-
-    // ошибка средней величины
+    // похибка середньої величини
     mean_error = (float)(deviation / sqrt(data.size()));
-
-    // относительная ошибка средней величины
+    // відносна похибка середньої величини
     relative_mean_error = mean_error / average;
 }
