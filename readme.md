@@ -13,17 +13,7 @@ Using `-df` key you may write data to `*.csv` file for the next importing to Lib
 
 ![Google table data import](/img/screen.png)
 
-Use `build.sh` and `run.sh` from the `src` folder to compile and run the application
-
-For more convenience you may add path to the application into `.bashrc` file
-
-```
-
-export PATH=$PATH:/%path_to_application_folder%/
-
-```
-
-and then use simple SH schemes e.g.
+.sh file example for running in terminal
 
 ```SH
 
@@ -43,7 +33,7 @@ exec $SHELL
 
 ```
 
-or for writing `.csv` use
+.sh file example for writing to `.csv`
 
 ```SH
 
@@ -56,5 +46,43 @@ onerow -df 1 2 3 0 0
 onerow -df 23.1 18.6 19 20 20 24 19.5
 
 exec $SHELL
+
+```
+
+<hr>
+
+<b>To compile and run the utility</b>
+
+1. Clone the Repository
+
+```SH
+
+git clone https://github.com/Evgenk2020/one-row-stat-linux
+
+cd one-row-stat-linux
+
+```
+
+2. Build the Project
+
+```SH
+
+./build.sh
+
+```
+
+3. Run the Project
+
+```SH
+
+./run.sh
+
+```
+
+For more convenience add path to the application into `.bashrc` and call `onerow` from any folder
+
+```
+
+export PATH=$PATH:[path_to_application_folder]
 
 ```
