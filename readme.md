@@ -11,7 +11,7 @@ onerow -d | -df [data...]
 ```
 Using `-df` key you may write data to `*.csv` file for the next importing to LibreOffice Calc, MS Excell or Google Tables
 
-![Google table data import](/img/screen.png)
+![Google table data import](/.img/screen.png)
 
 .sh file example for running in terminal
 
