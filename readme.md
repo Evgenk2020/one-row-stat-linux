@@ -51,9 +51,17 @@ exec $SHELL
 
 <hr>
 
+> You need
+> <br>
+> [CMake](https://cmake.org/)
+> <br>
+> to be installed on your Linux system previously
+
+<hr>
+
 <b>To compile and run the utility</b>
 
-1. Clone the Repository
+1. Select empty folder, open terminal and clone the repository
 
 ```SH
 
@@ -63,7 +71,25 @@ cd one-row-stat-linux
 
 ```
 
-2. Build the Project
+2. Check for `rpm-build` package to be installed in your system
+
+```SH
+
+rpm -q rpm-build
+
+```
+
+If so you will see `rpm-build-6.0.0-1.fc43.x86_64` or something like that.
+
+If not it will be `package rpm-build is not installed`. Then install it from system repository
+
+```SH
+
+sudo dnf install rpm-build
+
+```
+
+3. Build the Project with `.rpm` setup package for Fedora/CentOS Stream by default
 
 ```SH
 
@@ -71,18 +97,16 @@ cd one-row-stat-linux
 
 ```
 
-3. Run the Project
+4. Install `.rpm` package from build folder
 
 ```SH
 
-./run.sh
+sudo dnf install *.rpm
 
 ```
 
-For more convenience add path to the application into `.bashrc` and call `onerow` from any folder
+<hr>
 
-```
+If using either than Fedora/CentOS Stream change the first string `set(assemble_tgz OFF)` in CMakeLists.txt to `set(assemble_tgz ON)` before building the Project. Move `.tar.gz` file to any folder and unpack it.
 
-export PATH=$PATH:[path_to_application_folder]
-
-```
+Then run `fifteen` from unpacked folder.
