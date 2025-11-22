@@ -109,4 +109,14 @@ sudo dnf install *.rpm
 
 If using either than Fedora/CentOS Stream change the first string `set(assemble_tgz OFF)` in CMakeLists.txt to `set(assemble_tgz ON)` before building the Project. Move `.tar.gz` file to any folder and unpack it.
 
-Then run `fifteen` from unpacked folder.
+Then run `./onerow -d | -df [data...]` in terminal from unpacked folder.
+
+For more convenience you may add path to the application into `.bashrc` file
+
+```
+
+export PATH=$PATH:/%path_to_application_folder%/
+
+```
+
+In this case it will be possible to run `onerow -d | -df [data...]` in terminal directly.
