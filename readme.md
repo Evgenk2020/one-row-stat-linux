@@ -113,7 +113,7 @@ Then run `./onerow -d | -df [data...]` in terminal from unpacked folder.
 
 For more convenience you may add path to the application into `.bashrc` file
 
-```
+```SH
 
 export PATH=$PATH:/%path_to_application_folder%/
 
