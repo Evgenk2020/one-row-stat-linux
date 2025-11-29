@@ -81,10 +81,23 @@ void file_info::see_info(statistics *stat)
     writer.imbue(m_loc);
 
     writer << quo << "Послідовність:" << quo << coma;
+    auto w_end = stat->data.begin();
+
     for (auto data : stat->data)
     {
-        writer << quo << data << quo << coma;
+        if (std::next(w_end, 1) != stat->data.end())
+        {
+            writer << quo << data << quo << coma;
+        }
+
+        else
+        {
+            writer << quo << data << quo;
+        }
+
+        w_end++;
     }
+
     writer << std::endl;
 
     writer << quo << "Число елементів:" << quo << coma << quo << stat->data.size() << quo << std::endl;
