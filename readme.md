@@ -1,5 +1,3 @@
-# Basic statistical treatment
-
 <p align="center">
   <a href="https://github.com/Evgenk2020/one-row-stat-linux/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Evgenk2020/one-row-stat-linux" alt="license">
@@ -23,6 +21,8 @@
     <img src="https://img.shields.io/github/v/release/Evgenk2020/one-row-stat-linux" alt="latest release">
   </a>
 </p>
+
+# Basic statistical treatment
 
 Lab utility for simple statistical estimation
 
