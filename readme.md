@@ -1,5 +1,29 @@
 # Basic statistical treatment
 
+<p align="center">
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Evgenk2020/one-row-stat-linux" alt="license">
+  </a>
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux/commits">
+    <img src="https://img.shields.io/github/last-commit/Evgenk2020/one-row-stat-linux" alt="last commit">
+  </a>
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux">
+    <img src="https://img.shields.io/github/repo-size/Evgenk2020/one-row-stat-linux" alt="repo size">
+  </a>
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux/stargazers">
+    <img src="https://img.shields.io/github/stars/Evgenk2020/one-row-stat-linux" alt="stars">
+  </a>
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux/network/members">
+    <img src="https://img.shields.io/github/forks/Evgenk2020/one-row-stat-linux" alt="forks">
+  </a>
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux">
+    <img src="https://img.shields.io/github/languages/top/Evgenk2020/one-row-stat-linux" alt="top language">
+  </a>
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux/releases">
+    <img src="https://img.shields.io/github/v/release/Evgenk2020/one-row-stat-linux" alt="latest release">
+  </a>
+</p>
+
 Lab utility for simple statistical estimation
 
 Run it with specified keys
