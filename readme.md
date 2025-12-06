@@ -20,6 +20,10 @@
   <a href="https://github.com/Evgenk2020/one-row-stat-linux/releases">
     <img src="https://img.shields.io/github/v/release/Evgenk2020/one-row-stat-linux" alt="latest release">
   </a>
+  <!-- Added version badge -->
+  <a href="https://github.com/Evgenk2020/one-row-stat-linux">
+    <img src="https://img.shields.io/badge/version-1.0.1-blue" alt="version">
+  </a>
 </p>
 
 # Basic statistical treatment
