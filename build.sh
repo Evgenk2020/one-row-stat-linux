@@ -1,19 +1,17 @@
 #!/bin/bash
 
-CURR_DIR=$0
-CURR_DIR=$(realpath $CURR_DIR)
-CURR_DIR=$(dirname $CURR_DIR)
+curr=$(dirname $(realpath $0))
 
-BUILD_TARGET=$CURR_DIR/build
+bld_target=$curr/build
 
-#rm -rd $BUILD_TARGET
+#rm -rd $bld_target
 
-if [ -d $BUILD_TARGET ]
+if [ -d $bld_target ]
 then
-  cd $BUILD_TARGET
+  cd $bld_target
 else
-  mkdir $BUILD_TARGET
-  cd $BUILD_TARGET
+  mkdir $bld_target
+  cd $bld_target
 fi
 
 cmake ..
