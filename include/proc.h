@@ -2,42 +2,45 @@
 #define PROC_H
 
 #include "../include/output.h"
-#include <iostream>
 #include <map>
+#include <string>
+#include <string_view>
+#include <vector>
 
-typedef std::map<int, std::string> inp_var;
+using inp_var = std::map<int, std::string>;
 
 struct keys
 {
-    const std::string k_help_one = "-h";
-    const std::string k_help_two = "--help";
-    const std::string k_info = "-i";
-    const std::string k_data = "-d";
-    const std::string k_file = "-df";
+    static constexpr std::string_view k_help_one{"-h"};
+    static constexpr std::string_view k_help_two{"--help"};
+    static constexpr std::string_view k_info{"-i"};
+    static constexpr std::string_view k_data{"-d"};
+    static constexpr std::string_view k_file{"-df"};
 };
 
 class processing
 {
 protected:
-    keys _keys;
     inp_var _inp_var;
+
     virtual void helping() = 0;
     virtual void converting() = 0;
     virtual void counting() = 0;
 
 public:
-    virtual ~processing();
+    virtual ~processing() = default;
     void going();
 };
 
-class decree : public processing
+class decree final : public processing
 {
 private:
     std::vector<float> data;
 
 public:
-    ~decree();
-    decree(inp_var _inp);
+    explicit decree(inp_var inp);
+    ~decree() override = default;
+
     void helping() override;
     void converting() override;
     void counting() override;

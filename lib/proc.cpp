@@ -1,86 +1,90 @@
 #include "../include/proc.h"
-// #include <regex>
-
-processing::~processing() {}
+#include <charconv>
+#include <iostream>
 
 void processing::going()
 {
     if (_inp_var.size() == 1)
     {
-        this->helping();
+        helping();
+        return;
     }
-
     if (_inp_var.size() > 1)
     {
-        this->converting();
-        this->counting();
+        converting();
+        counting();
     }
 }
 
-decree::~decree() {}
-decree::decree(inp_var _inp) { _inp_var = _inp; }
+decree::decree(inp_var inp)
+{
+    _inp_var = std::move(inp);
+}
 
 void decree::helping()
 {
-    if (_inp_var.at(1) == _keys.k_help_one || _inp_var.at(1) == _keys.k_help_two)
-    {
-        print_info inf(new help_info);
-        inf._print();
-    }
+    const auto &key = _inp_var.at(1);
 
-    else if (_inp_var.at(1) == _keys.k_info)
+    if (key == keys::k_help_one || key == keys::k_help_two)
     {
-        print_info inf(new inf_info);
-        inf._print();
+        print_info{new help_info}._print();
     }
-
+    else if (key == keys::k_info)
+    {
+        print_info{new inf_info}._print();
+    }
     else
     {
-        std::cout << "error... use -h or --help for details" << std::endl;
+        std::cout << "error... use -h or --help for details\n";
     }
 }
 
 void decree::converting()
 {
-    if (_inp_var.size() > 2)
+    if (_inp_var.size() < 3)
     {
-        for (auto it = _inp_var.find(2); it != _inp_var.end(); it++)
-        {
-            try
-            {
-                data.push_back(stof(it->second));
-            }
-
-            catch (const std::exception &e)
-            {
-                std::cout << "error.. use correct data values" << std::endl;
-                exit(1);
-            }
-        }
+        std::cout << "error.. the number of data can not be less than two\n";
+        return;
     }
 
-    else
+    for (auto it = std::next(_inp_var.begin()); it != _inp_var.end(); ++it)
     {
-        std::cout << "error.. the number of data can not be less than two " << std::endl;
+        if (it->first < 2)
+        {
+            continue;
+        }
+
+        float value{};
+        const auto &str = it->second;
+
+        const auto [ptr, ec] =
+            std::from_chars(str.data(), str.data() + str.size(), value);
+
+        if (ec != std::errc{})
+        {
+            std::cout << "error.. use correct data values\n";
+            data.clear();
+            return;
+        }
+
+        data.push_back(value);
     }
 }
 
 void decree::counting()
 {
-    if (_inp_var.at(1) == _keys.k_data)
-    {
-        print_info inf(new screen_info);
-        inf._print(data);
-    }
+    const auto &key = _inp_var.at(1);
 
-    else if (_inp_var.at(1) == _keys.k_file)
+    if (key == keys::k_data)
     {
-        print_info inf(new file_info);
-        inf._print(data);
+        print_info{new screen_info}._print(data);
     }
-
+    else if (key == keys::k_file)
+    {
+        print_info{new file_info}._print(data);
+    }
     else
     {
-        std::cout << "incorrect key.. use [-d | -df] keys for results" << std::endl;
+        std::cout << "incorrect key.. use [-d | -df] keys for results\n";
     }
 }
