@@ -9,6 +9,7 @@ void processing::going()
         helping();
         return;
     }
+
     if (_inp_var.size() > 1)
     {
         converting();
@@ -29,13 +30,15 @@ void decree::helping()
     {
         print_info{new help_info}._print();
     }
+
     else if (key == keys::k_info)
     {
         print_info{new inf_info}._print();
     }
+
     else
     {
-        std::cout << "error... use -h or --help for details\n";
+        std::cout << "error... use -h or --help for details" << std::endl;
     }
 }
 
@@ -43,11 +46,11 @@ void decree::converting()
 {
     if (_inp_var.size() < 3)
     {
-        std::cout << "error.. the number of data can not be less than two\n";
+        std::cout << "error.. the number of data can not be less than two" << std::endl;
         return;
     }
 
-    for (auto it = std::next(_inp_var.begin()); it != _inp_var.end(); ++it)
+    for (auto it = std::next(_inp_var.begin()); it != _inp_var.end(); it++)
     {
         if (it->first < 2)
         {
@@ -56,13 +59,11 @@ void decree::converting()
 
         float value{};
         const auto &str = it->second;
-
-        const auto [ptr, ec] =
-            std::from_chars(str.data(), str.data() + str.size(), value);
+        const auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value);
 
         if (ec != std::errc{})
         {
-            std::cout << "error.. use correct data values\n";
+            std::cout << "error.. use correct data values" << std::endl;
             data.clear();
             return;
         }
@@ -79,12 +80,14 @@ void decree::counting()
     {
         print_info{new screen_info}._print(data);
     }
+
     else if (key == keys::k_file)
     {
         print_info{new file_info}._print(data);
     }
+
     else
     {
-        std::cout << "incorrect key.. use [-d | -df] keys for results\n";
+        std::cout << "incorrect key.. use [-d | -df] keys for results" << std::endl;
     }
 }
