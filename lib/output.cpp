@@ -3,6 +3,11 @@
 #include <fstream>
 #include <locale>
 
+#include <format>
+#include <print>
+#include <ranges>
+#include <filesystem>
+
 general_info::~general_info() {}
 
 void help_info::see_info()
@@ -50,68 +55,64 @@ void inf_info::see_info()
 
 data_info::~data_info() {}
 
-void screen_info::see_info(statistics *stat)
+void screen_info::see_info(const statistics &stat)
 {
 
     std::cout << "Послідовність: ";
-    for (auto data : stat->data)
+    for (auto data : stat.data)
     {
         std::cout << data << ' ';
     }
     std::cout << std::endl;
 
-    std::cout << "Число елементів: " << stat->data.size() << std::endl;
-    std::cout << "Сума чисел: " << stat->sum << std::endl;
-    std::cout << "Середнє арифметичне: " << stat->average << std::endl;
-    std::cout << "Середнє квадратичне: " << stat->root_mean_square << std::endl;
-    std::cout << "Дисперсія: " << stat->dispersion << std::endl;
-    std::cout << "Стандартне відхилення: " << stat->deviation << std::endl;
-    std::cout << "Коефіцієнт варіації: " << stat->variation_co << std::endl;
-    std::cout << "Похибка середньої величини: " << stat->mean_error << std::endl;
-    std::cout << "Відносна похибка середньої величини: " << stat->relative_mean_error << std::endl;
+    std::cout << "Число елементів: " << stat.data.size() << std::endl;
+    std::cout << "Сума чисел: " << stat.sum << std::endl;
+    std::cout << "Середнє арифметичне: " << stat.average << std::endl;
+    std::cout << "Середнє квадратичне: " << stat.root_mean_square << std::endl;
+    std::cout << "Дисперсія: " << stat.dispersion << std::endl;
+    std::cout << "Стандартне відхилення: " << stat.deviation << std::endl;
+    std::cout << "Коефіцієнт варіації: " << stat.variation_co << std::endl;
+    std::cout << "Похибка середньої величини: " << stat.mean_error << std::endl;
+    std::cout << "Відносна похибка середньої величини: " << stat.relative_mean_error << std::endl;
 }
 
-void file_info::see_info(statistics *stat)
+void file_info::see_info(const statistics &stat)
 {
-    std::ofstream writer("one-rstat.csv", std::ios::app);
-    const char coma = ',';
-    const char quo = '\"';
+    namespace fs = std::filesystem;
+    namespace rv = std::ranges::views;
 
-    std::locale m_loc("uk_UA.utf8");
-    writer.imbue(m_loc);
+    const fs::path file{"one-rstat.csv"};
+    std::ofstream out(file, std::ios::app);
 
-    writer << quo << "Послідовність:" << quo << coma;
-    auto w_end = stat->data.begin();
+    out.imbue(std::locale{"uk_UA.utf8"});
 
-    for (auto data : stat->data)
+    auto csv = [&out](std::string_view key, auto &&value)
     {
-        if (std::next(w_end, 1) != stat->data.end())
-        {
-            writer << quo << data << quo << coma;
-        }
+        out << std::format("\"{}\",\"{}\"\n", key, value);
+    };
 
-        else
-        {
-            writer << quo << data << quo;
-        }
+    // Послідовність
+    out << "\"Послідовність:\",";
 
-        w_end++;
-    }
+    auto quoted = stat.data | rv::transform([](const auto &v)
+                                            { return std::format("\"{}\"", v); });
 
-    writer << std::endl;
+    out << std::format("{}\n", std::ranges::to<std::string>(quoted | rv::join_with(',')));
 
-    writer << quo << "Число елементів:" << quo << coma << quo << stat->data.size() << quo << std::endl;
-    writer << quo << "Сума чисел: " << quo << coma << quo << stat->sum << quo << std::endl;
-    writer << quo << "Середнє арифметичне:" << quo << coma << quo << stat->average << quo << std::endl;
-    writer << quo << "Середнє квадратичне: " << quo << coma << quo << stat->root_mean_square << quo << std::endl;
-    writer << quo << "Дисперсія:" << quo << coma << quo << stat->dispersion << quo << std::endl;
-    writer << quo << "Стандартне відхилення:" << quo << coma << quo << stat->deviation << quo << std::endl;
-    writer << quo << "Коефіцієнт варіації:" << quo << coma << quo << stat->variation_co << quo << std::endl;
-    writer << quo << "Похибка середньої величини:" << quo << coma << quo << stat->mean_error << quo << std::endl;
-    writer << quo << "Відносна похибка середньої величини:" << quo << coma << quo << stat->relative_mean_error << quo << std::endl;
-    writer << "" << std::endl;
+    // Статистика
+    csv("Число елементів:", stat.data.size());
+    csv("Сума чисел:", stat.sum);
+    csv("Середнє арифметичне:", stat.average);
+    csv("Середнє квадратичне:", stat.root_mean_square);
+    csv("Дисперсія:", stat.dispersion);
+    csv("Стандартне відхилення:", stat.deviation);
+    csv("Коефіцієнт варіації:", stat.variation_co);
+    csv("Похибка середньої величини:", stat.mean_error);
+    csv("Відносна похибка середньої величини:", stat.relative_mean_error);
 
-    std::cout << "Дані додані у файл one-rstat.csv" << std::endl;
+    out << '\n';
+
+    std::print("Дані додані у файл {}\n", file.string());
 }
 
 //--------------------------------------------------
@@ -120,7 +121,7 @@ print_info::print_info(general_info *temp) : g_info(temp) {}
 print_info::print_info(data_info *temp) : d_info(temp) {}
 
 void print_info::_print() { g_info->see_info(); }
-void print_info::_print(statistics stat) { d_info->see_info(&stat); }
+void print_info::_print(statistics stat) { d_info->see_info(stat); }
 
 print_info::~print_info()
 {

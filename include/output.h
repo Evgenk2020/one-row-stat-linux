@@ -27,20 +27,20 @@ public:
 class data_info
 {
 public:
-    virtual void see_info(statistics *stat) = 0;
+    virtual void see_info(const statistics &stat) = 0;
     virtual ~data_info();
 };
 
 class screen_info : public data_info
 {
 public:
-    void see_info(statistics *stat) override;
+    void see_info(const statistics &stat) override;
 };
 
 class file_info : public data_info
 {
 public:
-    void see_info(statistics *stat) override;
+    void see_info(const statistics &stat) override;
 };
 
 //--------------------------------------------------
