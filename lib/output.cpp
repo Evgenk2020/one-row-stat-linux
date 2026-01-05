@@ -69,7 +69,7 @@ void screen_info::see_info(const statistics &stat)
     }
     std::print("\n");
 
-    auto line = [](std::string_view label, const auto &value)
+    auto line = [](std::string_view label, const auto &value) -> void
     {
         std::print("{} {}\n", label, value);
     };
@@ -95,7 +95,7 @@ void file_info::see_info(const statistics &stat)
 
     out.imbue(std::locale{"uk_UA.utf8"});
 
-    auto csv = [&out](std::string_view key, auto &&value)
+    auto csv = [&out](std::string_view key, auto &&value) -> void
     {
         out << std::format("\"{}\",\"{}\"\n", key, value);
     };
