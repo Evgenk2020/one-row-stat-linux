@@ -1,4 +1,5 @@
 #include "../include/output.h"
+
 #include <iostream>
 #include <fstream>
 #include <locale>
@@ -56,14 +57,12 @@ data_info::~data_info() {}
 
 void screen_info::see_info(const statistics &stat)
 {
-    namespace rv = std::ranges::views;
-
     std::print("Послідовність: ");
 
     bool first = true;
     for (const auto &v : stat.data)
     {
-        std::print("{}{}", first ? "" : ", ", v);
+        std::print("{}{}", first ? "" : " ", v);
         first = false;
     }
     std::print("\n");
