@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <locale>
-
 #include <format>
 #include <print>
 #include <ranges>
@@ -57,23 +56,32 @@ data_info::~data_info() {}
 
 void screen_info::see_info(const statistics &stat)
 {
+    namespace rv = std::ranges::views;
 
-    std::cout << "Послідовність: ";
-    for (auto data : stat.data)
+    std::print("Послідовність: ");
+
+    bool first = true;
+    for (const auto &v : stat.data)
     {
-        std::cout << data << ' ';
+        std::print("{}{}", first ? "" : ", ", v);
+        first = false;
     }
-    std::cout << std::endl;
+    std::print("\n");
 
-    std::cout << "Число елементів: " << stat.data.size() << std::endl;
-    std::cout << "Сума чисел: " << stat.sum << std::endl;
-    std::cout << "Середнє арифметичне: " << stat.average << std::endl;
-    std::cout << "Середнє квадратичне: " << stat.root_mean_square << std::endl;
-    std::cout << "Дисперсія: " << stat.dispersion << std::endl;
-    std::cout << "Стандартне відхилення: " << stat.deviation << std::endl;
-    std::cout << "Коефіцієнт варіації: " << stat.variation_co << std::endl;
-    std::cout << "Похибка середньої величини: " << stat.mean_error << std::endl;
-    std::cout << "Відносна похибка середньої величини: " << stat.relative_mean_error << std::endl;
+    auto line = [](std::string_view label, const auto &value)
+    {
+        std::print("{} {}\n", label, value);
+    };
+
+    line("Число елементів:", stat.data.size());
+    line("Сума чисел:", stat.sum);
+    line("Середнє арифметичне:", stat.average);
+    line("Середнє квадратичне:", stat.root_mean_square);
+    line("Дисперсія:", stat.dispersion);
+    line("Стандартне відхилення:", stat.deviation);
+    line("Коефіцієнт варіації:", stat.variation_co);
+    line("Похибка середньої величини:", stat.mean_error);
+    line("Відносна похибка середньої величини:", stat.relative_mean_error);
 }
 
 void file_info::see_info(const statistics &stat)
