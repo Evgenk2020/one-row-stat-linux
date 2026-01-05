@@ -67,6 +67,7 @@ void screen_info::see_info(const statistics &stat)
         std::print("{}{}", first ? "" : " ", v);
         first = false;
     }
+    
     std::print("\n");
 
     auto line = [](std::string_view label, const auto &value) -> void
