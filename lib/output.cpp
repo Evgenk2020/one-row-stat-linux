@@ -87,10 +87,10 @@ void screen_info::see_info(const statistics &stat)
 
 void file_info::see_info(const statistics &stat)
 {
-    namespace fs = std::filesystem;
-    namespace rv = std::ranges::views;
+    namespace file_system = std::filesystem;
+    namespace range_views = std::ranges::views;
 
-    const fs::path file{"one-rstat.csv"};
+    const file_system::path file{"one-rstat.csv"};
     std::ofstream out(file, std::ios::app);
 
     out.imbue(std::locale{"uk_UA.utf8"});
@@ -102,8 +102,8 @@ void file_info::see_info(const statistics &stat)
 
     // Послідовність
     out << "\"Послідовність:\",";
-    auto quoted = stat.data | rv::transform([](const auto &v) { return std::format("\"{}\"", v); });
-    out << std::format("{}\n", std::ranges::to<std::string>(quoted | rv::join_with(',')));
+    auto quoted = stat.data | range_views::transform([](const auto &v) { return std::format("\"{}\"", v); });
+    out << std::format("{}\n", std::ranges::to<std::string>(quoted | range_views::join_with(',')));
 
     // Статистика
     csv("Число елементів:", stat.data.size());
