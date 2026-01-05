@@ -102,10 +102,7 @@ void file_info::see_info(const statistics &stat)
 
     // Послідовність
     out << "\"Послідовність:\",";
-
-    auto quoted = stat.data | rv::transform([](const auto &v)
-                                            { return std::format("\"{}\"", v); });
-
+    auto quoted = stat.data | rv::transform([](const auto &v)  { return std::format("\"{}\"", v); });
     out << std::format("{}\n", std::ranges::to<std::string>(quoted | rv::join_with(',')));
 
     // Статистика
