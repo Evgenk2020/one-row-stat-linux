@@ -92,32 +92,28 @@ void file_info::see_info(const statistics &stat)
     namespace range_views = std::ranges::views;
 
     const file_system::path file{"one-rstat.csv"};
-    std::ofstream out(file, std::ios::app);
+    std::ofstream csv(file, std::ios::app);
 
-    out.imbue(std::locale{"uk_UA.utf8"});
+    auto loc = std::locale{"uk_UA.utf8"};
 
-    auto csv = [&out](std::string_view key, auto &&value) -> void
-    {
-        out << std::format("\"{}\",\"{}\"\n", key, value);
-    };
+    // sequence
+    csv << "\"Послідовність:\",";
+    auto quoted = stat.data | range_views::transform([&loc](const auto &v) { return std::format(loc, "\"{:L}\"", v); });
+    csv << std::format("{}\n", std::ranges::to<std::string>(quoted | range_views::join_with(',')));
 
-    // Послідовність
-    out << "\"Послідовність:\",";
-    auto quoted = stat.data | range_views::transform([](const auto &v) { return std::format("\"{}\"", v); });
-    out << std::format("{}\n", std::ranges::to<std::string>(quoted | range_views::join_with(',')));
+    // statistics
+    constexpr std::string_view formatter = "\"{}\",\"{:L}\"\n";
 
-    // Статистика
-    csv("Число елементів:", stat.data.size());
-    csv("Сума чисел:", stat.sum);
-    csv("Середнє арифметичне:", stat.average);
-    csv("Середнє квадратичне:", stat.root_mean_square);
-    csv("Дисперсія:", stat.dispersion);
-    csv("Стандартне відхилення:", stat.deviation);
-    csv("Коефіцієнт варіації:", stat.variation_co);
-    csv("Похибка середньої величини:", stat.mean_error);
-    csv("Відносна похибка середньої величини:", stat.relative_mean_error);
-
-    out << '\n';
+    csv << std::format(loc, formatter, "Число елементів:", stat.data.size());
+    csv << std::format(loc, formatter, "Сума чисел:", stat.sum);
+    csv << std::format(loc, formatter, "Середнє арифметичне:", stat.average);
+    csv << std::format(loc, formatter, "Середнє квадратичне:", stat.root_mean_square);
+    csv << std::format(loc, formatter, "Дисперсія:", stat.dispersion);
+    csv << std::format(loc, formatter, "Стандартне відхилення:", stat.deviation);
+    csv << std::format(loc, formatter, "Коефіцієнт варіації:", stat.variation_co);
+    csv << std::format(loc, formatter, "Похибка середньої величини:", stat.mean_error);
+    csv << std::format(loc, formatter, "Відносна похибка середньої величини:", stat.relative_mean_error);
+    csv << '\n';
 
     std::print("Дані додані у файл {}\n", file.string());
 }
