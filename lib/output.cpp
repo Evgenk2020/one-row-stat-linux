@@ -59,13 +59,10 @@ data_info::~data_info() {}
 
 void screen_info::see_info(const statistics &stat)
 {
-    std::print("Послідовність: ");
-
-    bool first = true;
+    std::print("Послідовність:");
     for (const auto &v : stat.data)
     {
-        std::print("{}{}", first ? "" : " ", v);
-        first = false;
+        std::print(" {}", v);
     }
     
     std::print("\n");
