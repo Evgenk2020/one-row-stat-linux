@@ -47,7 +47,7 @@ void decree::converting()
     if (_inp_var.size() < 3)
     {
         std::cout << "error.. the number of data can not be less than two" << std::endl;
-        return;
+        exit(1);
     }
 
     for (auto it = std::next(_inp_var.begin()); it != _inp_var.end(); it++)
